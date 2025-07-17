@@ -5,8 +5,9 @@ using UnityEngine.InputSystem;
 
 public class UserInputListener : MonoBehaviour, PlayerControls.IPlayerActions
 {
-    public Action OnMousePressed;
-    public Action OnMouseReleased;
+    public Action OnGrab;
+    public Action OnRelease;
+    public Action OnMouseMove;
 
     private PlayerControls playerControls;
 
@@ -33,14 +34,17 @@ public class UserInputListener : MonoBehaviour, PlayerControls.IPlayerActions
 
     void PlayerControls.IPlayerActions.OnLook(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+        {
+            OnMouseMove?.Invoke();
+        }
     }
 
     void PlayerControls.IPlayerActions.OnGrab(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            Debug.Log($"OnGrab");
+            OnGrab?.Invoke();
         }
     }
 
@@ -48,7 +52,7 @@ public class UserInputListener : MonoBehaviour, PlayerControls.IPlayerActions
     {
         if (context.performed)
         {
-            Debug.Log($"OnRelease");
+            OnRelease?.Invoke();
         }
     }
 }
