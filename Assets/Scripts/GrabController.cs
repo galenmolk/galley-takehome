@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class GrabController : MonoBehaviour
 {
-    //[SerializeField] private UserInputListener userInputListener;
+    [SerializeField] private UserInputListener userInputListener;
     [SerializeField] private Camera gameCamera;
     [SerializeField] private float maxGrabDistance = 100f;
     [SerializeField] private Transform grabPoint;
@@ -13,25 +13,27 @@ public class GrabController : MonoBehaviour
 
     private IGrabbable heldGrabbable;
     private IGrabbable hoveringGrabbable;
+    private Transform cameraTransform;
 
     void Awake()
     {
+        cameraTransform = gameCamera.transform;
         grabbableLayerMask = LayerMask.GetMask("Grabbable");
     }
 
-    // void OnEnable()
-    // {
-    //     userInputListener.OnGrab += TryGrab;
-    //     userInputListener.OnRelease += TryRelease;
-    //     userInputListener.OnMouseMove += HandleMouseMove;
-    // }
+    void OnEnable()
+    {
+        userInputListener.OnGrab += TryGrab;
+        userInputListener.OnRelease += TryRelease;
+        userInputListener.OnLook += Look;
+    }
 
-    // void OnDisable()
-    // {
-    //     userInputListener.OnGrab -= TryGrab;
-    //     userInputListener.OnRelease -= TryRelease;
-    //     userInputListener.OnMouseMove -= HandleMouseMove;
-    // }
+    void OnDisable()
+    {
+        userInputListener.OnGrab -= TryGrab;
+        userInputListener.OnRelease -= TryRelease;
+        userInputListener.OnLook -= Look;
+    }
 
     private void TryGrab()
     {
@@ -44,10 +46,14 @@ public class GrabController : MonoBehaviour
 
     private void TryRelease()
     {
-        heldGrabbable = null;
+        if (heldGrabbable != null)
+        {
+            heldGrabbable.Release();
+            heldGrabbable = null;
+        }
     }
 
-    private void HandleMouseMove(Vector2 delta)
+    private void Look(Vector2 delta)
     {
         if (heldGrabbable != null)
         {
@@ -79,8 +85,7 @@ public class GrabController : MonoBehaviour
     {
         grabbable = null;
 
-        var ray = gameCamera.ScreenPointToRay(MousePos);
-        if (!Physics.Raycast(ray, out var hitInfo, maxGrabDistance, grabbableLayerMask))
+        if (!Physics.Raycast(cameraTransform.position, cameraTransform.forward, out var hitInfo, maxGrabDistance, grabbableLayerMask))
         {
             return false;
         }

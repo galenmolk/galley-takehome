@@ -6,6 +6,8 @@ namespace StarterAssets
 	[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 	public class FirstPersonController : MonoBehaviour
 	{
+		[SerializeField] private UserInputListener _input;
+
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
@@ -45,7 +47,7 @@ namespace StarterAssets
 		public float TopClamp = 90.0f;
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
-
+		[SerializeField] private GameObject _mainCamera;
 		[SerializeField] private float _lookThreshold = 0.01f;
 
 		// cinemachine
@@ -60,25 +62,11 @@ namespace StarterAssets
 		// timeout deltatime
 		private float _fallTimeoutDelta;
 
-
 		private CharacterController _controller;
-		private UserInputListener _input;
-		private GameObject _mainCamera;
-
-		private void Awake()
-		{
-			// get a reference to our main camera
-			if (_mainCamera == null)
-			{
-				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-			}
-		}
 
 		private void Start()
 		{
 			_controller = GetComponent<CharacterController>();
-			_input = GetComponent<UserInputListener>();
-
 			_fallTimeoutDelta = FallTimeout;
 		}
 
@@ -122,8 +110,6 @@ namespace StarterAssets
 
 		private void Move()
 		{
-			Debug.Log($"{_input.MoveValue}");
-
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
