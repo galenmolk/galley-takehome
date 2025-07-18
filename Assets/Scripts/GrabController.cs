@@ -3,9 +3,10 @@ using UnityEngine.InputSystem;
 
 public class GrabController : MonoBehaviour
 {
-    [SerializeField] private UserInputListener userInputListener;
+    //[SerializeField] private UserInputListener userInputListener;
     [SerializeField] private Camera gameCamera;
     [SerializeField] private float maxGrabDistance = 100f;
+    [SerializeField] private Transform grabPoint;
 
     private LayerMask grabbableLayerMask;
     private Vector2 MousePos => Mouse.current.position.value;
@@ -18,38 +19,43 @@ public class GrabController : MonoBehaviour
         grabbableLayerMask = LayerMask.GetMask("Grabbable");
     }
 
-    void OnEnable()
-    {
-        userInputListener.OnGrab += TryGrab;
-        userInputListener.OnRelease += TryRelease;
-        userInputListener.OnMouseMove += HandleMouseMove;
-    }
+    // void OnEnable()
+    // {
+    //     userInputListener.OnGrab += TryGrab;
+    //     userInputListener.OnRelease += TryRelease;
+    //     userInputListener.OnMouseMove += HandleMouseMove;
+    // }
 
-    void OnDisable()
-    {
-        userInputListener.OnGrab -= TryGrab;
-        userInputListener.OnRelease -= TryRelease;
-        userInputListener.OnMouseMove -= HandleMouseMove;
-    }
+    // void OnDisable()
+    // {
+    //     userInputListener.OnGrab -= TryGrab;
+    //     userInputListener.OnRelease -= TryRelease;
+    //     userInputListener.OnMouseMove -= HandleMouseMove;
+    // }
 
     private void TryGrab()
     {
         if (IsPointingToGrabbable(out var grabbable))
         {
-            grabbable.Grab();
+            heldGrabbable = grabbable;
+            grabbable.Grab(grabPoint);
         }
     }
 
     private void TryRelease()
     {
-        Debug.Log("TryRelease");
+        heldGrabbable = null;
     }
 
-    private void HandleMouseMove()
+    private void HandleMouseMove(Vector2 delta)
     {
         if (heldGrabbable != null)
         {
-            Debug.Log($"Move Held Grabbable");
+            // delta is in screenspace 
+
+            // we want to convert that
+
+            heldGrabbable.Drag(grabPoint.position);
             return;
         }
 
@@ -72,13 +78,13 @@ public class GrabController : MonoBehaviour
     private bool IsPointingToGrabbable(out IGrabbable grabbable)
     {
         grabbable = null;
+
         var ray = gameCamera.ScreenPointToRay(MousePos);
         if (!Physics.Raycast(ray, out var hitInfo, maxGrabDistance, grabbableLayerMask))
         {
             return false;
         }
 
-        grabbable = hitInfo.collider.GetComponent<IGrabbable>();
-        return grabbable != null;
+        return hitInfo.transform.TryGetComponent(out grabbable);
     }
 }

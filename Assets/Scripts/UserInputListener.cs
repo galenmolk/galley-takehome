@@ -1,46 +1,33 @@
 using System;
-using Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class UserInputListener : MonoBehaviour, PlayerControls.IPlayerActions
+public class UserInputListener : MonoBehaviour
 {
-    public Action OnGrab;
-    public Action OnRelease;
-    public Action OnMouseMove;
+    public event Action OnGrab;
+    public event Action OnRelease;
+    public event Action<Vector2> OnLook;
+    public event Action<Vector2> OnMove;
 
-    private PlayerControls playerControls;
+    public Vector2 MoveValue { get; private set; }
+    public Vector2 LookValue { get; private set; }
 
-    void OnEnable()
+    public void MoveInputReceived(InputAction.CallbackContext context)
     {
-        if (playerControls == null)
-        {
-            playerControls = new PlayerControls();
-            playerControls.Player.SetCallbacks(this);
-        }
-
-        playerControls.Enable();
+        MoveValue = context.ReadValue<Vector2>();
     }
 
-    void OnDisable()
+    public void LookInputReceived(InputAction.CallbackContext context)
     {
-        playerControls.Disable();
-    }
+        LookValue = context.ReadValue<Vector2>();
 
-    void PlayerControls.IPlayerActions.OnMove(InputAction.CallbackContext context)
-    {
-
-    }
-
-    void PlayerControls.IPlayerActions.OnLook(InputAction.CallbackContext context)
-    {
         if (context.performed)
         {
-            OnMouseMove?.Invoke();
+            OnLook?.Invoke(LookValue);
         }
     }
 
-    void PlayerControls.IPlayerActions.OnGrab(InputAction.CallbackContext context)
+    public void GrabInputReceived(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
@@ -48,11 +35,16 @@ public class UserInputListener : MonoBehaviour, PlayerControls.IPlayerActions
         }
     }
 
-    void PlayerControls.IPlayerActions.OnRelease(InputAction.CallbackContext context)
+    public void ReleaseInputReceived(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
             OnRelease?.Invoke();
         }
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
