@@ -65,8 +65,8 @@ Rigidbody:
   m_GameObject: {fileID: 5135694506850955751}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 2
-  m_AngularDrag: 0.1
+  m_Drag: 1
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -96,7 +96,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crateRigidbody: {fileID: 8155388281711959770}
-  dragLerpSpeed: 30
+  baseDragSpeed: 10
+  mouseSpeedDragFactor: 8
+  settleThreshold: 0.15
+  defaultLinearDamping: 1
+  grabLinearDamping: 5
 --- !u!1001 &857246114505705186
 PrefabInstance:
   m_ObjectHideFlags: 0

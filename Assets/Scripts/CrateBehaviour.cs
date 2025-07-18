@@ -6,19 +6,25 @@ public interface IGrabbable
     void Release();
     void BeginHover();
     void EndHover();
-    void Drag(Vector3 velocity);
 }
 
 public class CrateBehaviour : MonoBehaviour, IGrabbable
 {
     [SerializeField] private Rigidbody crateRigidbody;
-    [SerializeField] private float dragLerpSpeed = 30f;
+    [SerializeField] private float baseDragSpeed = 30f;
+    [SerializeField] private float mouseSpeedDragFactor = 2f;
+    [SerializeField] private float settleThreshold = 0.2f;
+    [SerializeField] private float defaultLinearDamping = 1f;
+    [SerializeField] private float grabLinearDamping = 5f;
 
     private Transform grabPoint;
 
-    public void Drag(Vector3 targetPoint)
+    private Vector3 lastGrabPointPosition;
+    private Vector3 dragVelocity;
+
+    void Start()
     {
-        
+        crateRigidbody.linearDamping = defaultLinearDamping;
     }
 
     void FixedUpdate()
@@ -28,9 +34,17 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
             return;
         }
 
-        var newPosition = Vector3.Lerp(transform.position, grabPoint.position, Time.deltaTime * dragLerpSpeed);
-        Debug.Log($"Dragging {newPosition}");
-        crateRigidbody.MovePosition(newPosition);
+        dragVelocity = (grabPoint.position - lastGrabPointPosition) / Time.fixedDeltaTime;
+
+        lastGrabPointPosition = grabPoint.position;
+
+        var toGrabPoint = grabPoint.position - transform.position;
+
+        if (toGrabPoint.magnitude > settleThreshold)
+        {
+            crateRigidbody.AddForce(toGrabPoint.normalized * baseDragSpeed);
+            crateRigidbody.AddForce(dragVelocity * mouseSpeedDragFactor, ForceMode.Acceleration);
+        }
     }
 
     void IGrabbable.BeginHover()
@@ -45,15 +59,17 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
 
     void IGrabbable.Grab(Transform grabPoint)
     {
-        Debug.Log($"Grab");
-        this.grabPoint = grabPoint;
         crateRigidbody.useGravity = false;
+        crateRigidbody.linearDamping = grabLinearDamping;
+        lastGrabPointPosition = grabPoint.position;
+        this.grabPoint = grabPoint;
     }
 
     void IGrabbable.Release()
     {
-        Debug.Log($"Release");
         this.grabPoint = null;
+
+        crateRigidbody.linearDamping = defaultLinearDamping;
         crateRigidbody.useGravity = true;
     }
 }

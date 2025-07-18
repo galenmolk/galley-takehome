@@ -57,11 +57,6 @@ public class GrabController : MonoBehaviour
     {
         if (heldGrabbable != null)
         {
-            // delta is in screenspace 
-
-            // we want to convert that
-
-            heldGrabbable.Drag(grabPoint.position);
             return;
         }
 
