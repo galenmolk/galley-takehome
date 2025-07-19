@@ -7,6 +7,7 @@ public class GrabController : MonoBehaviour
     [SerializeField] private Camera gameCamera;
     [SerializeField] private float maxGrabDistance = 100f;
     [SerializeField] private Transform grabPoint;
+    [SerializeField] private GameObject reticleTail;
 
     private LayerMask grabbableLayerMask;
     private Vector2 MousePos => Mouse.current.position.value;
@@ -19,6 +20,7 @@ public class GrabController : MonoBehaviour
     {
         cameraTransform = gameCamera.transform;
         grabbableLayerMask = LayerMask.GetMask("Grabbable");
+        reticleTail.SetActive(false);
     }
 
     void OnEnable()
@@ -67,12 +69,14 @@ public class GrabController : MonoBehaviour
                 hoveringGrabbable?.EndHover();
                 hoveringGrabbable = newGrabbable;
                 hoveringGrabbable.BeginHover();
+                reticleTail.SetActive(true);
             }
         }
         else if (hoveringGrabbable != null)
         {
             hoveringGrabbable.EndHover();
             hoveringGrabbable = null;
+            reticleTail.SetActive(false);
         }
     }
 
