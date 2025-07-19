@@ -25,9 +25,15 @@ public class CollisionSounds : MonoBehaviour
     public float minPitch = 0.9f;
     public float maxPitch = 1.1f;
     public float minVelocityForSound = 0.05f;
+    [SerializeField] private float quietTimeAfterGameStart = 2f;
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (Time.time < quietTimeAfterGameStart)
+        {
+            return;
+        }
+
         if (((1 << gameObject.layer) & collisionSoundLayer.value) == 0)
         {
             return;
