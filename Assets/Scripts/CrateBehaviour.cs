@@ -29,7 +29,7 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
 
     void FixedUpdate()
     {
-        if (grabPoint == null)
+        if (grabPoint == null || crateRigidbody == null)
         {
             return;
         }
@@ -65,6 +65,11 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
 
     void IGrabbable.Release()
     {
+        if (crateRigidbody == null)
+        {
+            return;
+        }
+        
         this.grabPoint = null;
 
         crateRigidbody.linearDamping = defaultLinearDamping;

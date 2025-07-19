@@ -24,10 +24,17 @@ public class CollisionSounds : MonoBehaviour
     public float baseVolume = 0.1f;
     public float minPitch = 0.9f;
     public float maxPitch = 1.1f;
+    public float minVelocityForSound = 0.05f;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (((1 << gameObject.layer) & collisionSoundLayer.value) == 0)
+        {
+            return;
+        }
+
+        var velocity = collision.relativeVelocity.magnitude;
+        if (velocity < minVelocityForSound)
         {
             return;
         }
@@ -45,7 +52,7 @@ public class CollisionSounds : MonoBehaviour
         var clip = sfxClip.clip;
         audioSource.clip = clip;
 
-        var logSpeed = Mathf.Log10(Mathf.Max(rb.linearVelocity.magnitude, 1f));
+        var logSpeed = Mathf.Log10(velocity);
         audioSource.volume = Mathf.Min(baseVolume + logSpeed, maxVolume);
         Debug.Log($"Vol: {audioSource.volume} (vel: {logSpeed})");
         audioSource.time = clip.length * sfxClip.startTime;
