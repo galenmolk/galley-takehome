@@ -8,7 +8,7 @@ public class CrateDestructionController : MonoBehaviour
 
     [SerializeField] private DestructibleObject destructibleObject;
 
-    [SerializeField, Min(0f)] private float startingHealth;
+    [SerializeField] private Vector2 startingHealthRange = new(50, 125);
 
     [SerializeField] private float damageThreshold = 5f;
     [SerializeField] private Rigidbody rb;
@@ -17,7 +17,7 @@ public class CrateDestructionController : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = startingHealth;
+        currentHealth = Random.Range(startingHealthRange.x, startingHealthRange.y);
     }
 
     private void OnCollisionEnter(Collision collision)

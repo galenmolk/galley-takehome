@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public interface IGrabbable
@@ -11,11 +12,16 @@ public interface IGrabbable
 public class CrateBehaviour : MonoBehaviour, IGrabbable
 {
     [SerializeField] private Rigidbody crateRigidbody;
+    [SerializeField] private MeshRenderer rend;
     [SerializeField] private float baseDragSpeed = 30f;
     [SerializeField] private float mouseSpeedDragFactor = 2f;
     [SerializeField] private float settleThreshold = 0.2f;
     [SerializeField] private float defaultLinearDamping = 1f;
     [SerializeField] private float grabLinearDamping = 5f;
+    [SerializeField] private float hoverGlowFadeDuration = 0.3f;
+    [SerializeField] private Ease hoverGlowEase = Ease.InOutCubic;
+    [SerializeField, ColorUsage(true, true)] private Color normalColor;
+    [SerializeField, ColorUsage(true, true)] private Color hoverColor;
 
     private Transform grabPoint;
 
@@ -25,6 +31,7 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
     void Start()
     {
         crateRigidbody.linearDamping = defaultLinearDamping;
+        rend.material = new Material(rend.sharedMaterial);
     }
 
     void FixedUpdate()
@@ -49,10 +56,22 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
 
     void IGrabbable.BeginHover()
     {
+        if (rend != null)
+        {
+            rend.material.EnableKeyword("_EMISSION");
+            rend.material.DOKill();
+            rend.material.DOColor(hoverColor, "_EmissionColor", hoverGlowFadeDuration);
+        }
     }
 
     void IGrabbable.EndHover()
     {
+        if (rend != null)
+        {
+            rend.material.DisableKeyword("_EMISSION");
+            rend.material.DOKill();
+            rend.material.DOColor(normalColor, "_EmissionColor", hoverGlowFadeDuration);
+        }
     }
 
     void IGrabbable.Grab(Transform grabPoint)
@@ -69,7 +88,7 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
         {
             return;
         }
-        
+
         this.grabPoint = null;
 
         crateRigidbody.linearDamping = defaultLinearDamping;
