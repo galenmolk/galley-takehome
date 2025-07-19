@@ -102,7 +102,7 @@ MonoBehaviour:
   mouseSpeedDragFactor: 8
   settleThreshold: 0.15
   defaultLinearDamping: 1
-  grabLinearDamping: 5
+  grabLinearDamping: 4
 --- !u!114 &8366483679711361753
 MonoBehaviour:
   m_ObjectHideFlags: 0

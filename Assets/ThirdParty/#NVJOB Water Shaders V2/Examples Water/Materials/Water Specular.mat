@@ -157,8 +157,8 @@ Material:
     m_Floats:
     - _Albedo2Flow: 0.3
     - _Albedo2Tiling: 0.9
-    - _AlbedoContrast: 1.4
-    - _AlbedoIntensity: 2.55
+    - _AlbedoContrast: 1
+    - _AlbedoIntensity: 1
     - _Brightness: 1
     - _BumpScale: 1
     - _Contrast: 1
@@ -212,7 +212,7 @@ Material:
     - _Mitigation: 22.4
     - _Mode: 0
     - _NormalDetailFlow: 1
-    - _NormalMap1Strength: 0.8
+    - _NormalMap1Strength: 0.6
     - _NormalMap2Flow: 0.4
     - _NormalMap2Strength: 0.7
     - _NormalMap2Tiling: 1.1
@@ -244,7 +244,7 @@ Material:
     - _ReverseFlow: -5
     - _Saturation: 1
     - _SaturationRef: 0.5
-    - _Shininess: 0.6
+    - _Shininess: 0.296
     - _SmoothnessTextureChannel: 0
     - _SoftFactor: 0.09
     - _SpecularHighlights: 1
@@ -271,8 +271,8 @@ Material:
     - _MirrorColor: {r: 1.1486983, g: 1.1486983, b: 1.1486983, a: 0.5}
     - _MirrorDepthColor: {r: 0, g: 0, b: 0, a: 0.5}
     - _ReflectColor: {r: 0.2258196, g: 0.23354737, b: 0.23921569, a: 1}
-    - _ReflectionColor: {r: 0.22749412, g: 0.23070937, b: 0.23921569, a: 0.5}
-    - _SpecColor: {r: 0.29411766, g: 0.33075517, b: 0.4117647, a: 1}
+    - _ReflectionColor: {r: 0.09233714, g: 0.10744367, b: 0.23584908, a: 0.5}
+    - _SpecColor: {r: 0.017641952, g: 0.13286833, b: 0.4125427, a: 1}
     - _SpecularColor: {r: 0.5808823, g: 0.5808823, b: 0.5808823, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
