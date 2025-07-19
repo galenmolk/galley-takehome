@@ -31,7 +31,6 @@ public class UserInputListener : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Grab");
             OnGrab?.Invoke();
         }
     }
@@ -40,7 +39,6 @@ public class UserInputListener : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Release");
             OnRelease?.Invoke();
         }
     }

@@ -49,12 +49,10 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
 
     void IGrabbable.BeginHover()
     {
-        Debug.Log($"Begin Hover");
     }
 
     void IGrabbable.EndHover()
     {
-        Debug.Log($"End Hover");
     }
 
     void IGrabbable.Grab(Transform grabPoint)
