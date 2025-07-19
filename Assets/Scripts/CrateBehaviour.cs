@@ -60,7 +60,7 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
         {
             rend.material.EnableKeyword("_EMISSION");
             rend.material.DOKill();
-            rend.material.DOColor(hoverColor, "_EmissionColor", hoverGlowFadeDuration);
+            rend.material.DOColor(hoverColor, "_EmissionColor", hoverGlowFadeDuration).SetEase(hoverGlowEase);
         }
     }
 
@@ -70,7 +70,7 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
         {
             rend.material.DisableKeyword("_EMISSION");
             rend.material.DOKill();
-            rend.material.DOColor(normalColor, "_EmissionColor", hoverGlowFadeDuration);
+            rend.material.DOColor(normalColor, "_EmissionColor", hoverGlowFadeDuration).SetEase(hoverGlowEase);
         }
     }
 

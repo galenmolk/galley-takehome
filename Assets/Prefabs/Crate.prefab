@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 2906614356162857624}
   - component: {fileID: 8947910025781489744}
   - component: {fileID: 370497688619762366}
-  - component: {fileID: 6140613607112076814}
   m_Layer: 6
   m_Name: Crate
   m_TagString: Untagged
@@ -310,31 +309,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.57985914, y: 1.303096, z: 0.6576941}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &6140613607112076814
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5135694506850955751}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5608647
-  m_Height: 1.1721036
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9156868, y: 0.9156866, z: 0.9156866}
+  m_Center: {x: 0, y: -0.000000059604645, z: 0}
 --- !u!1001 &5293309107361029903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -387,7 +363,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: StylShip_Box
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3607417009381202273, guid: c05c34cf7415e0c4e98b01a365a21256, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

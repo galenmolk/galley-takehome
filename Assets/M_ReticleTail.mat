@@ -35,9 +35,9 @@ Material:
     - _TrailLength: 3.5
     - _TrailSteps: 40
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _ColorEnd: {r: 0.3987629, g: 0.9716981, b: 0.79496026, a: 1}
-    - _ColorMid: {r: 0.3914257, g: 0.2823529, b: 0.81960785, a: 1}
-    - _ColorStart: {r: 0.5568628, g: 0.051376194, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorEnd: {r: 0.38679248, g: 0, b: 0.17033386, a: 1}
+    - _ColorMid: {r: 0.5471698, g: 0.23379989, b: 0.20906018, a: 1}
+    - _ColorStart: {r: 0.5471698, g: 0.48555344, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -2,6 +2,9 @@ Shader "Custom/S_ReticleTail"
 {
     Properties
     {
+        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+        _Color ("Tint", Color) = (1,1,1,1)
+
         _ColorStart ("Start Color", Color) = (1, 1, 0, 1)     
         _ColorMid ("Mid Color", Color) = (1, 0.5, 0, 1)        
         _ColorEnd ("End Color", Color) = (1, 0, 0, 0)           
@@ -13,14 +16,18 @@ Shader "Custom/S_ReticleTail"
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" "Queue"="Transparent" }
+        Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" "CanUseSpriteAtlas"="True" }
         LOD 100
+
+        Blend SrcAlpha OneMinusSrcAlpha
+        Cull Off
+        ZWrite Off
+        Lighting Off
 
         Pass
         {
-            ZWrite Off
-            Blend SrcAlpha OneMinusSrcAlpha
-            Cull Off
+            Name "UI"
+            Tags { "LightMode"="Always" }
 
             CGPROGRAM
             #pragma vertex vert
@@ -28,15 +35,20 @@ Shader "Custom/S_ReticleTail"
 
             struct appdata
             {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+                float4 vertex   : POSITION;
+                float4 color    : COLOR;
+                float2 texcoord : TEXCOORD0;
             };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
-                float4 vertex : SV_POSITION;
+                float4 vertex   : SV_POSITION;
+                fixed4 color    : COLOR;
+                float2 uv       : TEXCOORD0;
             };
+
+            sampler2D _MainTex;
+            fixed4 _Color;
 
             float4 _ColorStart;
             float4 _ColorMid;
@@ -51,7 +63,8 @@ Shader "Custom/S_ReticleTail"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = v.texcoord;
+                o.color = v.color * _Color;
                 return o;
             }
 
@@ -78,8 +91,7 @@ Shader "Custom/S_ReticleTail"
                     finalColor.rgb += gradientColor.rgb * alpha;
                     finalColor.a += alpha * gradientColor.a;
                 }
-
-                return saturate(finalColor);
+                return saturate(finalColor) * i.color; 
             }
             ENDCG
         }

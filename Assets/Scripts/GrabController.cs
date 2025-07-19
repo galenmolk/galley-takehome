@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,9 @@ public class GrabController : MonoBehaviour
     [SerializeField] private Camera gameCamera;
     [SerializeField] private float maxGrabDistance = 100f;
     [SerializeField] private Transform grabPoint;
-    [SerializeField] private GameObject reticleTail;
+    [SerializeField] private CanvasGroup reticleTail;
+    [SerializeField] private float reticleFadeDuration = 0.2f;
+    [SerializeField] private Ease reticleFadeEase = Ease.OutSine;
 
     private LayerMask grabbableLayerMask;
     private Vector2 MousePos => Mouse.current.position.value;
@@ -20,7 +23,7 @@ public class GrabController : MonoBehaviour
     {
         cameraTransform = gameCamera.transform;
         grabbableLayerMask = LayerMask.GetMask("Grabbable");
-        reticleTail.SetActive(false);
+        reticleTail.alpha = 0f;
     }
 
     void OnEnable()
@@ -69,14 +72,16 @@ public class GrabController : MonoBehaviour
                 hoveringGrabbable?.EndHover();
                 hoveringGrabbable = newGrabbable;
                 hoveringGrabbable.BeginHover();
-                reticleTail.SetActive(true);
+                reticleTail.DOKill();
+                reticleTail.DOFade(1f, reticleFadeDuration).SetEase(reticleFadeEase);
             }
         }
         else if (hoveringGrabbable != null)
         {
             hoveringGrabbable.EndHover();
             hoveringGrabbable = null;
-            reticleTail.SetActive(false);
+            reticleTail.DOKill();
+            reticleTail.DOFade(0f, reticleFadeDuration).SetEase(reticleFadeEase);
         }
     }
 
