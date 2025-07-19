@@ -79,12 +79,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crateRigidbody: {fileID: 8155388281711959770}
-  rend: {fileID: 0}
-  baseDragSpeed: 10
-  mouseSpeedDragFactor: 8
+  rend: {fileID: 6880909110429806139}
+  baseDragSpeed: 12
+  mouseSpeedDragFactor: 15
   settleThreshold: 0.15
   defaultLinearDamping: 1
-  grabLinearDamping: 3
+  grabLinearDamping: 10
   hoverGlowFadeDuration: 0.4
   hoverGlowEase: 18
   normalColor: {r: 0, g: 0, b: 0.003921569, a: 1}
@@ -372,5 +372,10 @@ PrefabInstance:
 --- !u!4 &5243623325049454653 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 121750259874307890, guid: c05c34cf7415e0c4e98b01a365a21256, type: 3}
+  m_PrefabInstance: {fileID: 5293309107361029903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6880909110429806139 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1587654072548389172, guid: c05c34cf7415e0c4e98b01a365a21256, type: 3}
   m_PrefabInstance: {fileID: 5293309107361029903}
   m_PrefabAsset: {fileID: 0}
