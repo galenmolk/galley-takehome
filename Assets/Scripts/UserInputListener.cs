@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class UserInputListener : MonoBehaviour
 {
+    public static UserInputListener Instance { get; private set; }
+
     public event Action OnGrab;
     public event Action OnRelease;
     public event Action<Vector2> OnLook;
@@ -11,6 +13,11 @@ public class UserInputListener : MonoBehaviour
 
     public Vector2 MoveValue { get; private set; }
     public Vector2 LookValue { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void MoveInputReceived(InputAction.CallbackContext context)
     {
