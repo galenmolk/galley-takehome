@@ -6,8 +6,6 @@ namespace StarterAssets
 	[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 	public class FirstPersonController : MonoBehaviour
 	{
-		[SerializeField] private UserInputListener _input;
-
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
@@ -92,10 +90,10 @@ namespace StarterAssets
 		private void CameraRotation()
 		{
 			// if there is an input
-			if (_input.LookValue.sqrMagnitude >= _lookThreshold)
+			if (UserInputListener.Instance.LookValue.sqrMagnitude >= _lookThreshold)
 			{
-				_cinemachineTargetPitch += _input.LookValue.y * RotationSpeed;
-				_rotationVelocity = _input.LookValue.x * RotationSpeed;
+				_cinemachineTargetPitch += UserInputListener.Instance.LookValue.y * RotationSpeed;
+				_rotationVelocity = UserInputListener.Instance.LookValue.x * RotationSpeed;
 
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
@@ -114,7 +112,7 @@ namespace StarterAssets
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is no input, set the target speed to 0
-			float targetSpeed = (_input.MoveValue == Vector2.zero) ? 0.0f : MoveSpeed;
+			float targetSpeed = (UserInputListener.Instance.MoveValue == Vector2.zero) ? 0.0f : MoveSpeed;
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
@@ -126,7 +124,7 @@ namespace StarterAssets
 			{
 				// creates curved result rather than a linear one giving a more organic speed change
 				// note T in Lerp is clamped, so we don't need to clamp our speed
-				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * _input.MoveValue.magnitude, Time.deltaTime * SpeedChangeRate);
+				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * UserInputListener.Instance.MoveValue.magnitude, Time.deltaTime * SpeedChangeRate);
 
 				// round speed to 3 decimal places
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
@@ -137,14 +135,14 @@ namespace StarterAssets
 			}
 
 			// normalise input direction
-			Vector3 inputDirection = new Vector3(_input.MoveValue.x, 0.0f, _input.MoveValue.y).normalized;
+			Vector3 inputDirection = new Vector3(UserInputListener.Instance.MoveValue.x, 0.0f, UserInputListener.Instance.MoveValue.y).normalized;
 
 			// note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is a move input rotate player when the player is moving
-			if (_input.MoveValue != Vector2.zero)
+			if (UserInputListener.Instance.MoveValue != Vector2.zero)
 			{
 				// move
-				inputDirection = transform.right * _input.MoveValue.x + transform.forward * _input.MoveValue.y;
+				inputDirection = transform.right * UserInputListener.Instance.MoveValue.x + transform.forward * UserInputListener.Instance.MoveValue.y;
 			}
 
 			// move the player

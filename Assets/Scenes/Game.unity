@@ -440,7 +440,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1337349819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &354682056
 AudioSource:
@@ -2939,6 +2939,7 @@ Transform:
   m_Children:
   - {fileID: 447859664}
   - {fileID: 298707450}
+  - {fileID: 354682055}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1361195407 stripped
@@ -5509,7 +5510,6 @@ SceneRoots:
   - {fileID: 1202776025}
   - {fileID: 5890617619156411561}
   - {fileID: 1115578619}
-  - {fileID: 354682055}
   - {fileID: 1337349819}
   - {fileID: 406249188}
   - {fileID: 1883873729}

@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class GrabController : MonoBehaviour
 {
-    [SerializeField] private UserInputListener userInputListener;
     [SerializeField] private Camera gameCamera;
     [SerializeField] private float maxGrabDistance = 100f;
     [SerializeField] private Transform grabPoint;
@@ -28,16 +27,16 @@ public class GrabController : MonoBehaviour
 
     void OnEnable()
     {
-        userInputListener.OnGrab += TryGrab;
-        userInputListener.OnRelease += TryRelease;
-        userInputListener.OnLook += Look;
+        UserInputListener.Instance.OnGrab += TryGrab;
+        UserInputListener.Instance.OnRelease += TryRelease;
+        UserInputListener.Instance.OnLook += Look;
     }
 
     void OnDisable()
     {
-        userInputListener.OnGrab -= TryGrab;
-        userInputListener.OnRelease -= TryRelease;
-        userInputListener.OnLook -= Look;
+        UserInputListener.Instance.OnGrab -= TryGrab;
+        UserInputListener.Instance.OnRelease -= TryRelease;
+        UserInputListener.Instance.OnLook -= Look;
     }
 
     private void TryGrab()
