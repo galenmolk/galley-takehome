@@ -140,6 +140,7 @@ MonoBehaviour:
   minPitch: 0.9
   maxPitch: 1.1
   minVelocityForSound: 0.05
+  quietTimeAfterGameStart: 2
 --- !u!82 &5449124586207917423
 AudioSource:
   m_ObjectHideFlags: 0
@@ -282,6 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b660fa00cf4b4abfaf183b974ad34f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyParticles: {fileID: 5178850773946604783, guid: 3c9e75c1f5cf54cd4b1eea4335a731ff, type: 3}
+  crystalPrefab: {fileID: 0}
   ignoreOtherVelocityLayer:
     serializedVersion: 2
     m_Bits: 128

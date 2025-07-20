@@ -72,7 +72,7 @@ public class GrabController : MonoBehaviour
                 hoveringGrabbable?.EndHover();
                 hoveringGrabbable = newGrabbable;
                 hoveringGrabbable.BeginHover();
-                reticleTail.DOKill();
+                reticleTail.DOKill();   
                 reticleTail.DOFade(1f, reticleFadeDuration).SetEase(reticleFadeEase);
             }
         }

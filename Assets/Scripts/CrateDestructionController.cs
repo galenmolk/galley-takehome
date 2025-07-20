@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class CrateDestructionController : MonoBehaviour
 {
+    [SerializeField] private GameObject destroyParticles;
+    [SerializeField] private GameObject crystalPrefab;
     [SerializeField] private LayerMask ignoreOtherVelocityLayer;
     [SerializeField] private float safeTimeThreshold;
-
     [SerializeField] private DestructibleObject destructibleObject;
-
     [SerializeField] private Vector2 startingHealthRange = new(50, 125);
-
     [SerializeField] private float damageThreshold = 5f;
     [SerializeField] private Rigidbody rb;
 
@@ -33,17 +32,22 @@ public class CrateDestructionController : MonoBehaviour
             rb.linearVelocity.magnitude :
             collision.relativeVelocity.magnitude;
 
-        if (damage > 0) {
-            Debug.Log($"{gameObject.name} was hit by {collision.gameObject.name} ({damage}) (ignore other? {ignoreOtherVelocity})");
+        if (damage < damageThreshold)
+        {
+            return;
         }
 
-        if (damage > damageThreshold)
-        {
-            currentHealth -= damage;
+        currentHealth -= damage;
+        ParticlePooler.Instance.SpawnDust(collision.GetContact(0).point);
 
-            if (currentHealth <= 0f)
+        if (currentHealth <= 0f)
+        {
+            rb.detectCollisions = false;
+            destructibleObject.Break();
+            Instantiate(destroyParticles, transform.position, Quaternion.identity);
+            if (crystalPrefab != null)
             {
-                destructibleObject.Break();
+                Instantiate(crystalPrefab, transform.position, Quaternion.identity);
             }
         }
     }
