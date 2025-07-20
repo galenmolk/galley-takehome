@@ -2,30 +2,25 @@ using UnityEngine;
 
 public class CollisionSounds : MonoBehaviour
 {
-    public LayerMask collisionSoundLayer;
-
-    public SfxClip[] clips;
-
-    public AudioSource audioSource;
-
-    public float minimumTimeBetweenClips = 1f;
+    [SerializeField] private SfxClip[] clips;
+    [SerializeField] private LayerMask collisionSoundLayer;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private float minimumTimeBetweenClips = 1f;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private float maxVolume = 0.7f;
+    
+    [Tooltip("Some extra volume will be added on top of this proportional to the object's velocity.")]
+    [SerializeField] private float baseVolume = 0.1f;
+    [SerializeField] private float minPitch = 0.9f;
+    [SerializeField] private float maxPitch = 1.1f;
+    [SerializeField] private float minVelocityForSound = 0.05f;
+    [SerializeField] private float quietTimeAfterGameStart = 2f;
 
     private float lastClipTime;
 
-    private int trackIdx;
-
-    public Rigidbody rb;
-
-    public float maxVolume = 0.7f;
-
-    public float baseVolume = 0.1f;
-    public float minPitch = 0.9f;
-    public float maxPitch = 1.1f;
-    public float minVelocityForSound = 0.05f;
-    [SerializeField] private float quietTimeAfterGameStart = 2f;
-
     private void OnCollisionEnter(Collision collision)
     {
+        // Quick fix to prevent ship physics from causing a lot of loud sounds at the top of the scene.
         if (Time.time < quietTimeAfterGameStart)
         {
             return;
@@ -53,9 +48,13 @@ public class CollisionSounds : MonoBehaviour
         var clip = sfxClip.clip;
         audioSource.clip = clip;
 
-        var logSpeed = Mathf.Log10(velocity);
-        audioSource.volume = Mathf.Min(baseVolume + logSpeed, maxVolume);
+        // Add some volume based on the velocity.
+        audioSource.volume = Mathf.Min(baseVolume + Mathf.Log10(velocity), maxVolume);
+
+        // startTime could allow you to specify an offset but I ended up not using it and 
+        // just quickly trimming the clips in Audacity.
         audioSource.time = clip.length * sfxClip.startTime;
+
         audioSource.pitch = Random.Range(minPitch, maxPitch);
         lastClipTime = currentTime;
         audioSource.Play();
