@@ -7,19 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class CrystalTrackerPanel : MonoBehaviour
 {
-    private Dictionary<Crystal.Type, CrystalState> crystalStates = new();
-
-    class CrystalState
-    {
-        public int count;
-        public CrystalIcon icon;
-
-        public CrystalState(CrystalIcon icon)
-        {
-            this.icon = icon;
-            this.count = 0;
-        }
-    }
+    private Dictionary<Crystal.Type, CrystalIcon> crystalIcons = new();
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip collectClip;
@@ -37,6 +25,7 @@ public class CrystalTrackerPanel : MonoBehaviour
     [SerializeField] private CanvasGroup gameFadePanel;
     [SerializeField] private float winDelay = 4f;
     [SerializeField] private float gameFadePanelDuration = 3f;
+    [SerializeField] private AudioSource musicSource;
 
 
     private Vector2 onScreenPos;
@@ -45,7 +34,7 @@ public class CrystalTrackerPanel : MonoBehaviour
     private bool isPanelVisible;
 
     private bool isProcessing;
-    private readonly Queue<CrystalState> crystalQueue = new();
+    private readonly Queue<CrystalIcon> crystalQueue = new();
 
     public Crystal.Type testType;
     [ContextMenu("test")]
@@ -57,7 +46,7 @@ public class CrystalTrackerPanel : MonoBehaviour
     private void Start()
     {
         gameFadePanel.alpha = 1f;
-        gameFadePanel.DOFade(0f, gameFadePanelDuration);
+        DOTween.Sequence().AppendInterval(2f).Append(gameFadePanel.DOFade(0f, gameFadePanelDuration));
 
         float panelHalfHeight = rt.rect.height * 0.5f;
         float canvasHalfHeight = ((RectTransform)rt.root).rect.height * 0.5f;
@@ -69,11 +58,11 @@ public class CrystalTrackerPanel : MonoBehaviour
 
         rt.anchoredPosition = offScreenPos;
 
-        crystalStates = transform.
+        crystalIcons = transform.
             GetComponentsInChildren<CrystalIcon>().
             ToDictionary(
                 icon => icon.Type,
-                icon => new CrystalState(icon)
+                icon => icon
             );
     }
 
@@ -89,7 +78,7 @@ public class CrystalTrackerPanel : MonoBehaviour
 
     private void EnqueueCrystal(Crystal.Type type)
     {
-        if (!crystalStates.TryGetValue(type, out var crystalState))
+        if (!crystalIcons.TryGetValue(type, out var crystalState))
         {
             Debug.LogError($"[{nameof(CrystalTrackerPanel)}.{nameof(EnqueueCrystal)}] No crystal state found for type ({type}).");
             return;
@@ -118,16 +107,15 @@ public class CrystalTrackerPanel : MonoBehaviour
 
         while (crystalQueue.Count > 0)
         {
-            var crystalState = crystalQueue.Dequeue();
+            var crystalIcon = crystalQueue.Dequeue();
 
-            crystalState.icon.AddCrystal();
-            audioSource.clip = collectClip;
+            crystalIcon.AddCrystal();
             audioSource.Play();
 
             await Task.Delay((int)(pauseDuration * 1000));
         }
 
-        if (crystalStates.Values.Sum(state => state.count) >= Crystal.MaxNeededPerType * crystalStates.Count)
+        if (crystalIcons.Values.Sum(icon => icon.CrystalCount) >= Crystal.MaxNeededPerType * crystalIcons.Count)
         {
             WinGame();
             return;
@@ -136,15 +124,6 @@ public class CrystalTrackerPanel : MonoBehaviour
         await rt.DOAnchorPos(offScreenPos, tweenDuration).SetEase(tweenEase).AsyncWaitForCompletion();
         isPanelVisible = false;
         isProcessing = false;
-    }
-
-    [ContextMenu("Win")]
-    private void WinTest()
-    {
-        rt.DOAnchorPos(onScreenPos, tweenDuration).SetEase(tweenEase).OnComplete(() =>
-        {
-            WinGame();
-        });
     }
 
     private void WinGame()
@@ -157,6 +136,7 @@ public class CrystalTrackerPanel : MonoBehaviour
             .Join(rt.DOScale(Vector3.one * winScale, winTweenDuration).SetEase(winTweenEase))
             .AppendInterval(winDelay)
             .Append(gameFadePanel.DOFade(1f, gameFadePanelDuration))
+            .Join(musicSource.DOFade(0f, gameFadePanelDuration))
             .AppendCallback(() =>
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
