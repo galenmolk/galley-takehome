@@ -1,4 +1,4 @@
-Shader "Unlit/S_BW_Reveal"
+Shader "Custom/S_BW_Reveal"
 {
     Properties
     {
@@ -32,7 +32,6 @@ Shader "Unlit/S_BW_Reveal"
             };
 
             sampler2D _MainTex;
-            float4 _MainTex_ST;
             float _RevealPercentage;
 
             v2f vert (appdata v)
