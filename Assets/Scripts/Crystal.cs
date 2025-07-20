@@ -1,11 +1,19 @@
+using System;
 using System.Collections;
-using Cinemachine;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Crystal : MonoBehaviour
 {
+    public enum Type
+    {
+        Green,
+        Peach,
+        Purple
+    }
+
+    public static event Action<Crystal.Type> OnCrystalAcquired;
+
+    [SerializeField] private Crystal.Type type;
     [SerializeField] private AnimationCurve buildUpCurve;
     [SerializeField] private AudioSource shimmerAudioSource;
     [SerializeField] private float buildUpDuration = 4f;
@@ -36,11 +44,11 @@ public class Crystal : MonoBehaviour
 
         CameraShaker.Instance.SetAmplitude(0f);
         gameObject.SetActive(false);
-        // insensity of glow increases
+
         // crystal explosion sfx
-        // crystal disappears
+
         // particle effect shoots up to crystal meter in UI
         // crystal icon charges
-        // 
+        OnCrystalAcquired?.Invoke(type);
     }
 }
