@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_ReticleTail
-  m_Shader: {fileID: 4800000, guid: 0743ead7b78454a20847403bb871773b, type: 3}
+  m_Name: M_BW_Reveal
+  m_Shader: {fileID: 4800000, guid: 09b6a99477d3c4b9ebaec8919f947390, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,15 +29,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _OrbitRadius: 0.08
-    - _Radius: 0.09
-    - _Speed: 50
-    - _TrailLength: 3.5
-    - _TrailSteps: 40
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorEnd: {r: 0.38679248, g: 0, b: 0.17033386, a: 1}
-    - _ColorMid: {r: 0.5471698, g: 0.23379989, b: 0.20906018, a: 1}
-    - _ColorStart: {r: 0.5471698, g: 0.48555344, b: 0, a: 1}
+    - _RevealPercentage: 1
+    m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -1,4 +1,4 @@
-Shader "Custom/S_ReticleTail"
+Shader "Custom/S_ReticleEffect"
 {
     Properties
     {
