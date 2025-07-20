@@ -78,8 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80243812f7e645d0b5f9bcb4c0c6709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crateRigidbody: {fileID: 8155388281711959770}
-  rend: {fileID: 6880909110429806139}
   baseDragSpeed: 12
   mouseSpeedDragFactor: 15
   settleThreshold: 0.15
@@ -89,6 +87,8 @@ MonoBehaviour:
   hoverGlowEase: 18
   normalColor: {r: 0, g: 0, b: 0.003921569, a: 1}
   hoverColor: {r: 0.17917067, g: 0, b: 1.3195078, a: 1}
+  crateRigidbody: {fileID: 8155388281711959770}
+  meshRenderer: {fileID: 6880909110429806139}
 --- !u!114 &8366483679711361753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,9 +101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5462ec30f9349c3b508fedddd57122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionSoundLayer:
-    serializedVersion: 2
-    m_Bits: 192
   clips:
   - clip: {fileID: 8300000, guid: 6e199f49567e14131984854543c75925, type: 3}
     volume: 0.15
@@ -132,6 +129,9 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: 30aa423dbe9dc4586bc22552b8cb2eff, type: 3}
     volume: 0.15
     startTime: 0
+  collisionSoundLayer:
+    serializedVersion: 2
+    m_Bits: 192
   audioSource: {fileID: 5449124586207917423}
   minimumTimeBetweenClips: 0.2
   rb: {fileID: 8155388281711959770}
@@ -283,16 +283,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b660fa00cf4b4abfaf183b974ad34f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyParticles: {fileID: 5178850773946604783, guid: 3c9e75c1f5cf54cd4b1eea4335a731ff, type: 3}
-  crystalPrefab: {fileID: 0}
   ignoreOtherVelocityLayer:
     serializedVersion: 2
     m_Bits: 128
-  safeTimeThreshold: 2
-  destructibleObject: {fileID: 2906614356162857624}
+  safeTimeThreshold: 5
   startingHealthRange: {x: 75, y: 150}
   damageThreshold: 0.5
-  rb: {fileID: 8155388281711959770}
+  rigidbody: {fileID: 8155388281711959770}
+  destructibleObject: {fileID: 2906614356162857624}
+  crystalPrefab: {fileID: 0}
 --- !u!65 &370497688619762366
 BoxCollider:
   m_ObjectHideFlags: 0

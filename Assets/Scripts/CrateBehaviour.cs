@@ -11,36 +11,50 @@ public interface IGrabbable
 
 public class CrateBehaviour : MonoBehaviour, IGrabbable
 {
-    [SerializeField] private Rigidbody crateRigidbody;
-    [SerializeField] private MeshRenderer rend;
+    private const string EmissionProp = "_EMISSION";
+    private const string EmissionColorProp = "_EmissionColor";
+
+    [Header("Physics Settings")]
     [SerializeField] private float baseDragSpeed = 30f;
+
+    [Tooltip("How much the mouse speed affects the force added to the object while grabbing.")]
     [SerializeField] private float mouseSpeedDragFactor = 2f;
+
+    [Tooltip("Force will only be added to the object if its distance from the target point is greatr than this value.")]
     [SerializeField] private float settleThreshold = 0.2f;
     [SerializeField] private float defaultLinearDamping = 1f;
+
+    [Tooltip("Allows the object to use a different linear damping value while being grabbed.")]
     [SerializeField] private float grabLinearDamping = 5f;
+
+    [Header("Hover Glow Settings")]
     [SerializeField] private float hoverGlowFadeDuration = 0.3f;
     [SerializeField] private Ease hoverGlowEase = Ease.InOutCubic;
     [SerializeField, ColorUsage(true, true)] private Color normalColor;
     [SerializeField, ColorUsage(true, true)] private Color hoverColor;
 
-    private Transform grabPoint;
+    [Header("References")]
+    [SerializeField] private Rigidbody crateRigidbody;
+    [SerializeField] private MeshRenderer meshRenderer;
 
+    private Transform grabPoint;
     private Vector3 lastGrabPointPosition;
     private Vector3 dragVelocity;
 
-    void Start()
+    private void Start()
     {
         crateRigidbody.linearDamping = defaultLinearDamping;
-        rend.material = new Material(rend.sharedMaterial);
+        meshRenderer.material = new Material(meshRenderer.sharedMaterial);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (grabPoint == null || crateRigidbody == null)
         {
             return;
         }
 
+        // Determine how fast the mouse moved between ticks.
         dragVelocity = (grabPoint.position - lastGrabPointPosition) / Time.fixedDeltaTime;
 
         lastGrabPointPosition = grabPoint.position;
@@ -49,6 +63,7 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
 
         if (toGrabPoint.magnitude > settleThreshold)
         {
+            // Separate AddForce calls for additional flexibility, if needed.
             crateRigidbody.AddForce(toGrabPoint.normalized * baseDragSpeed);
             crateRigidbody.AddForce(dragVelocity * mouseSpeedDragFactor, ForceMode.Acceleration);
         }
@@ -56,21 +71,21 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
 
     void IGrabbable.BeginHover()
     {
-        if (rend != null)
+        if (meshRenderer != null)
         {
-            rend.material.EnableKeyword("_EMISSION");
-            rend.material.DOKill();
-            rend.material.DOColor(hoverColor, "_EmissionColor", hoverGlowFadeDuration).SetEase(hoverGlowEase);
+            meshRenderer.material.EnableKeyword(EmissionProp);
+            meshRenderer.material.DOKill();
+            meshRenderer.material.DOColor(hoverColor, EmissionColorProp, hoverGlowFadeDuration).SetEase(hoverGlowEase);
         }
     }
 
     void IGrabbable.EndHover()
     {
-        if (rend != null)
+        if (meshRenderer != null)
         {
-            rend.material.DisableKeyword("_EMISSION");
-            rend.material.DOKill();
-            rend.material.DOColor(normalColor, "_EmissionColor", hoverGlowFadeDuration).SetEase(hoverGlowEase);
+            meshRenderer.material.DisableKeyword(EmissionProp);
+            meshRenderer.material.DOKill();
+            meshRenderer.material.DOColor(normalColor, EmissionColorProp, hoverGlowFadeDuration).SetEase(hoverGlowEase);
         }
     }
 
@@ -84,6 +99,7 @@ public class CrateBehaviour : MonoBehaviour, IGrabbable
 
     void IGrabbable.Release()
     {
+        // Quick way to prevent errors in case the crate is already being destroyed when this is called.
         if (crateRigidbody == null)
         {
             return;

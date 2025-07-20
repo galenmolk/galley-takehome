@@ -6,10 +6,13 @@ public class ParticlePooler : MonoBehaviour
 {
     public static ParticlePooler Instance { get; private set; }
 
-    [SerializeField] private ParticleSystem dustPrefab;
     [SerializeField] private int initialSize = 2;
 
+    [SerializeField] private ParticleSystem dustPrefab;
+    [SerializeField] private ParticleSystem explosionPrefab;
+
     private readonly Queue<ParticleSystem> dustInstances = new();
+    private readonly Queue<ParticleSystem> explosionInstances = new();
 
     private Dictionary<Crystal.Type, (Queue<ParticleSystem> queue, ParticleSystem prefab)> crystalCollectInstances;
     [SerializeField] private ParticleSystem greenCollectPrefab, purpleCollectPrefab, peachCollectPrefab;
@@ -29,6 +32,8 @@ public class ParticlePooler : MonoBehaviour
         {
             EnqueueNewInstance(dustInstances, dustPrefab);
 
+            EnqueueNewInstance(explosionInstances, explosionPrefab);
+
             var (greenQueue, greenPrefab) = crystalCollectInstances[Crystal.Type.Green];
             EnqueueNewInstance(greenQueue, greenPrefab);
 
@@ -43,6 +48,11 @@ public class ParticlePooler : MonoBehaviour
     public void SpawnDustEffect(Vector3 position)
     {
         SpawnEffect(position, dustInstances, dustPrefab);
+    }
+
+    public void SpawnExplosionEffect(Vector3 position)
+    {
+        SpawnEffect(position, explosionInstances, explosionPrefab);
     }
 
     public void SpawnCrystalCollectEffect(Vector3 position, Crystal.Type type)

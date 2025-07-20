@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: rend
       value: 
       objectReference: {fileID: 7018086371357061779}
+    - target: {fileID: 5208423400681658429, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
+      propertyPath: meshRenderer
+      value: 
+      objectReference: {fileID: 7018086371357061779}
     - target: {fileID: 8947910025781489744, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: crystalPrefab
       value: 

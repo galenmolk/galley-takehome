@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: rend
       value: 
       objectReference: {fileID: 36051688834454134}
+    - target: {fileID: 2964925310668887803, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
+      propertyPath: meshRenderer
+      value: 
+      objectReference: {fileID: 36051688834454134}
     - target: {fileID: 5540484841463618963, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.87

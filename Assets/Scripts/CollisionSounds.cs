@@ -8,7 +8,7 @@ public class CollisionSounds : MonoBehaviour
     [SerializeField] private float minimumTimeBetweenClips = 1f;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float maxVolume = 0.7f;
-    
+
     [Tooltip("Some extra volume will be added on top of this proportional to the object's velocity.")]
     [SerializeField] private float baseVolume = 0.1f;
     [SerializeField] private float minPitch = 0.9f;
@@ -21,7 +21,7 @@ public class CollisionSounds : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // Quick fix to prevent ship physics from causing a lot of loud sounds at the top of the scene.
-        if (Time.time < quietTimeAfterGameStart)
+        if (Time.timeSinceLevelLoad < quietTimeAfterGameStart)
         {
             return;
         }

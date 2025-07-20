@@ -630,8 +630,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1418aee860be74fe99da92a92c981d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dustPrefab: {fileID: 2878258811280971914, guid: 3ce188a0303774359aa308e3cff69c81, type: 3}
   initialSize: 2
+  dustPrefab: {fileID: 2878258811280971914, guid: 3ce188a0303774359aa308e3cff69c81, type: 3}
+  explosionPrefab: {fileID: 8727678871035951981, guid: 3c9e75c1f5cf54cd4b1eea4335a731ff, type: 3}
   greenCollectPrefab: {fileID: 3404672999506985417, guid: 16f43371e3b2c4759aaaf8fcdf770c8a, type: 3}
   purpleCollectPrefab: {fileID: 412080967394857994, guid: 25c79657c96ad4b94a381847758210f7, type: 3}
   peachCollectPrefab: {fileID: 3404672999506985417, guid: 52f21bd5d5ce7486bb20bc35273ee334, type: 3}
@@ -4813,6 +4814,10 @@ PrefabInstance:
       objectReference: {fileID: 4118238432147781418}
     - target: {fileID: 8947910025781489744, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: rb
+      value: 
+      objectReference: {fileID: 4118238432147781421}
+    - target: {fileID: 8947910025781489744, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
+      propertyPath: rigidbody
       value: 
       objectReference: {fileID: 4118238432147781421}
     - target: {fileID: 8947910025781489744, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
