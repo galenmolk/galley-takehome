@@ -103,31 +103,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - clip: {fileID: 8300000, guid: 6e199f49567e14131984854543c75925, type: 3}
-    volume: 0.15
     startTime: 0
   - clip: {fileID: 8300000, guid: a6dfef073ec8c4744b89612e124bfe1f, type: 3}
-    volume: 0.15
     startTime: 0
   - clip: {fileID: 8300000, guid: 3ddcf3fbdf70449089f88572d232e953, type: 3}
-    volume: 0.15
     startTime: 0
   - clip: {fileID: 8300000, guid: 462369ab4fd7742a383fca573354f485, type: 3}
-    volume: 0.15
     startTime: 0
   - clip: {fileID: 8300000, guid: e3dd5ca1a264b4e4eb235c9f7e92019b, type: 3}
-    volume: 0.15
     startTime: 0
   - clip: {fileID: 8300000, guid: 777759e31273a4e22930d7be58635f56, type: 3}
-    volume: 0.15
     startTime: 0
   - clip: {fileID: 8300000, guid: 64998cd3ff3d64752ab15d0ee8dae151, type: 3}
-    volume: 0.15
     startTime: 0
   - clip: {fileID: 8300000, guid: 359a299006060476589dfd3054341bd8, type: 3}
-    volume: 0.15
     startTime: 0
   - clip: {fileID: 8300000, guid: 30aa423dbe9dc4586bc22552b8cb2eff, type: 3}
-    volume: 0.15
     startTime: 0
   collisionSoundLayer:
     serializedVersion: 2
@@ -135,11 +126,12 @@ MonoBehaviour:
   audioSource: {fileID: 5449124586207917423}
   minimumTimeBetweenClips: 0.2
   rb: {fileID: 8155388281711959770}
-  maxVolume: 0.55
+  maxVolume: 0.65
   baseVolume: 0.05
+  maxAdditionalVelocityVolume: 0.6
   minPitch: 0.9
   maxPitch: 1.1
-  minVelocityForSound: 0.05
+  minVelocityForSound: 0.1
   quietTimeAfterGameStart: 5
 --- !u!82 &5449124586207917423
 AudioSource:

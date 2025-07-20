@@ -1,24 +1,26 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FootstepSounds : MonoBehaviour
 {
+    [Header("Footstep Settings")]
     [SerializeField] private AudioClip[] footstepClips;
-    [SerializeField] private AudioSource audioSource;
     [SerializeField] private float footstepDelay = 0.5f;
     [SerializeField] private Vector2 randomPitchRange = new(0.9f, 1.1f);
 
-    private readonly List<AudioClip> availableClips = new();
+    [Header("References")]
+    [SerializeField] private AudioSource audioSource;
+
+    private List<AudioClip> availableClips;
 
     private AudioClip lastClip;
     private float lastFootstepTime;
 
     private void Start()
     {
-        foreach (var clip in footstepClips)
-        {
-            availableClips.Add(clip);
-        }
+        // Make a copy of the serialized array of clips so we can easily prevent the same clip from being played back-to-back.
+        availableClips = footstepClips.ToList();
     }
 
     private void TriggerFootstep()
@@ -40,13 +42,12 @@ public class FootstepSounds : MonoBehaviour
 
     private void Update()
     {
-        if (UserInputListener.Instance.MoveValue.magnitude > 0f)
+        var isWalking = UserInputListener.Instance.MoveValue.magnitude > 0f;
+         
+         if (isWalking && Time.time - footstepDelay > lastFootstepTime)
         {
-            if (Time.time - footstepDelay > lastFootstepTime)
-            {
-                TriggerFootstep();
-                lastFootstepTime = Time.time;
-            }
+            TriggerFootstep();
+            lastFootstepTime = Time.time;
         }
     }
 }

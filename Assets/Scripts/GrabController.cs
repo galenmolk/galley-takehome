@@ -4,12 +4,17 @@ using UnityEngine.InputSystem;
 
 public class GrabController : MonoBehaviour
 {
-    [SerializeField] private Camera gameCamera;
+    [Header("Grab Settings")]
     [SerializeField] private float maxGrabDistance = 100f;
-    [SerializeField] private Transform grabPoint;
+
+    [Header("Reticle Settings")]
     [SerializeField] private CanvasGroup reticleTail;
     [SerializeField] private float reticleFadeDuration = 0.2f;
     [SerializeField] private Ease reticleFadeEase = Ease.OutSine;
+
+    [Header("References")]
+    [SerializeField] private Camera gameCamera;
+    [SerializeField] private Transform grabPoint;
 
     private LayerMask grabbableLayerMask;
     private Vector2 MousePos => Mouse.current.position.value;
@@ -62,6 +67,7 @@ public class GrabController : MonoBehaviour
 
     private void Look(Vector2 delta)
     {
+        // Don't trigger hovering effects if we're currently grabbing an object.
         if (heldGrabbable != null)
         {
             return;

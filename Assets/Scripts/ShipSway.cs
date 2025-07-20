@@ -5,18 +5,14 @@ public class ShipSway : MonoBehaviour
     [SerializeField] private Rigidbody shipRb;
 
     [SerializeField] private Vector2 xSwayRange, ySwayRange, zSwayRange;
-
     [SerializeField] private Vector2 swayDurationRange;
-
     [SerializeField] private AnimationCurve swayCurve;
 
     [Tooltip("Wait a small amount of time after game starts before enabling sway.")]
     [SerializeField] private float startGameDelay;
 
     private Vector3 targetRotation;
-
     private Vector3 startRotation;
-
     private float timer;
     private float swayDuration;
     private Vector3 baseRotation;

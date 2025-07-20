@@ -6,16 +6,19 @@ public class ParticlePooler : MonoBehaviour
 {
     public static ParticlePooler Instance { get; private set; }
 
+    [Header("Initial instance count for all pools.")]
     [SerializeField] private int initialSize = 2;
 
+    [Header("Grabbable Object Effects")]
     [SerializeField] private ParticleSystem dustPrefab;
-    [SerializeField] private ParticleSystem explosionPrefab;
-
     private readonly Queue<ParticleSystem> dustInstances = new();
+
+    [SerializeField] private ParticleSystem explosionPrefab;
     private readonly Queue<ParticleSystem> explosionInstances = new();
 
-    private Dictionary<Crystal.Type, (Queue<ParticleSystem> queue, ParticleSystem prefab)> crystalCollectInstances;
+    [Header("Crystal Effects")]
     [SerializeField] private ParticleSystem greenCollectPrefab, purpleCollectPrefab, peachCollectPrefab;
+    private Dictionary<Crystal.Type, (Queue<ParticleSystem> queue, ParticleSystem prefab)> crystalCollectInstances;
 
     private void Awake()
     {

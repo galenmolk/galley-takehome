@@ -11,6 +11,7 @@ public class CollisionSounds : MonoBehaviour
 
     [Tooltip("Some extra volume will be added on top of this proportional to the object's velocity.")]
     [SerializeField] private float baseVolume = 0.1f;
+    [SerializeField] private float maxAdditionalVelocityVolume = 0.5f;
     [SerializeField] private float minPitch = 0.9f;
     [SerializeField] private float maxPitch = 1.1f;
     [SerializeField] private float minVelocityForSound = 0.05f;
@@ -49,7 +50,8 @@ public class CollisionSounds : MonoBehaviour
         audioSource.clip = clip;
 
         // Add some volume based on the velocity.
-        audioSource.volume = Mathf.Min(baseVolume + Mathf.Log10(velocity), maxVolume);
+        var velocityBasedVolume = Mathf.InverseLerp(0, 50, velocity) * maxAdditionalVelocityVolume;
+        audioSource.volume = Mathf.Min(baseVolume + velocityBasedVolume, maxVolume);
 
         // startTime could allow you to specify an offset but I ended up not using it and 
         // just quickly trimming the clips in Audacity.
