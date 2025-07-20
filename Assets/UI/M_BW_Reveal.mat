@@ -29,7 +29,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _RevealPercentage: 1
+    - _RevealPercentage: 0.33333334
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

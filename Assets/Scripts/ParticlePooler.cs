@@ -9,7 +9,7 @@ public class ParticlePooler : MonoBehaviour
     [SerializeField] private ParticleSystem dustPrefab;
     [SerializeField] private int initialSize = 2;
 
-    private Queue<ParticleSystem> dustInstances = new();
+    private readonly Queue<ParticleSystem> dustInstances = new();
 
     private void Awake()
     {
@@ -32,14 +32,13 @@ public class ParticlePooler : MonoBehaviour
             dustInstance = EnqueueNewInstance();
         }
 
-        Debug.Log($"Enabling {dustInstance.gameObject} {dustInstance.main.duration}");
         dustInstance.gameObject.SetActive(true);
         StartCoroutine(EnqueueAfterLifetime(dustInstance));
     }
 
     private ParticleSystem EnqueueNewInstance()
     {
-        var instance = Instantiate(dustPrefab);
+        var instance = Instantiate(dustPrefab, transform);
         instance.gameObject.SetActive(false);
         dustInstances.Enqueue(instance);
         return instance;

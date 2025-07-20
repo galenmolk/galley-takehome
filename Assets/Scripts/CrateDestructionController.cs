@@ -13,6 +13,7 @@ public class CrateDestructionController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
 
     private float currentHealth;
+    private bool isBroken;
 
     private void Start()
     {
@@ -21,6 +22,11 @@ public class CrateDestructionController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (isBroken)
+        {
+            return;
+        }
+
         if (Time.time < safeTimeThreshold)
         {
             return;
@@ -42,13 +48,24 @@ public class CrateDestructionController : MonoBehaviour
 
         if (currentHealth <= 0f)
         {
-            rb.detectCollisions = false;
-            destructibleObject.Break();
-            Instantiate(destroyParticles, transform.position, Quaternion.identity);
-            if (crystalPrefab != null)
-            {
-                Instantiate(crystalPrefab, transform.position, Quaternion.identity);
-            }
+            Break();
+        }
+    }
+
+    private void Break()
+    {
+        isBroken = true;
+
+        // Triggers breaking SFX and debris spawning.
+        destructibleObject.Break();
+
+        // Create some dust TODO pool this.
+        Instantiate(destroyParticles, transform.position, Quaternion.identity);
+
+        // Not all destructibles will contain crystals.
+        if (crystalPrefab != null)
+        {
+            Instantiate(crystalPrefab, transform.position, Quaternion.identity);
         }
     }
 }
