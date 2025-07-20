@@ -1,6 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 
+[RequireComponent(typeof(CinemachineVirtualCamera))]
 public class CameraShaker : MonoBehaviour
 {
     public static CameraShaker Instance { get; private set; }
