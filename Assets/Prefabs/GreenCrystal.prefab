@@ -185,8 +185,8 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 641dd0a17f21044e0b5dfdc28df8d9b8, type: 3}
   m_Resource: {fileID: 8300000, guid: 641dd0a17f21044e0b5dfdc28df8d9b8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: -1
+  m_Volume: 0.65
+  m_Pitch: 0.35
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -281,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662ffd1a3daa1448295ff95d11506e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   buildUpCurve:
     serializedVersion: 2
     m_Curve:
@@ -307,11 +308,14 @@ MonoBehaviour:
     m_RotationOrder: 4
   shimmerAudioSource: {fileID: 9046223009490941180}
   buildUpDuration: 5
-  audioPitchStart: 0.4
-  audioPitchEnd: 0.7
+  audioPitchStart: 0.35
+  audioPitchEnd: 0.65
   cameraShakeMax: 2
   crystalLight: {fileID: 1106800365490480274}
   lightIntensityMax: 6
+  spawnSfx: {fileID: 8300000, guid: a65e44e8c694a3a4891eef0db109e331, type: 3}
+  preSpawnSfxDelay: 0.4
+  preSequenceDelay: 0.5
 --- !u!108 &1106800365490480274 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 108663756983803230, guid: 67c6e02e204ef6244a8f475a94826851, type: 3}

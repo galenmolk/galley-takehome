@@ -290,8 +290,8 @@ MonoBehaviour:
     m_Bits: 128
   safeTimeThreshold: 2
   destructibleObject: {fileID: 2906614356162857624}
-  startingHealthRange: {x: 50, y: 125}
-  damageThreshold: 1
+  startingHealthRange: {x: 75, y: 150}
+  damageThreshold: 0.5
   rb: {fileID: 8155388281711959770}
 --- !u!65 &370497688619762366
 BoxCollider:

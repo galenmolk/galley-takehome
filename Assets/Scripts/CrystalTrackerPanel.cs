@@ -18,6 +18,10 @@ public class CrystalTrackerPanel : MonoBehaviour
         }
     }
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip collectClip;
+    [SerializeField] private AudioClip winClip; 
+
     private void Awake()
     {
         crystalStates = transform.
@@ -47,5 +51,7 @@ public class CrystalTrackerPanel : MonoBehaviour
         }
 
         crystalState.icon.AddCrystal();
+        audioSource.clip = collectClip;
+        audioSource.Play();
     }
 }

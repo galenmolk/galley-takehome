@@ -22,11 +22,17 @@ public class Crystal : MonoBehaviour
     [SerializeField] private float cameraShakeMax = 5f;
     [SerializeField] private Light crystalLight;
     [SerializeField] private float lightIntensityMax = 7f;
+    [SerializeField] private AudioClip spawnSfx;
+    [SerializeField] private float preSequenceDelay = 0.35f;
 
     private float spawnTime;
 
     private IEnumerator Start()
     {
+        yield return new WaitForSeconds(preSequenceDelay);
+
+        AudioSource.PlayClipAtPoint(spawnSfx, transform.position);
+
         spawnTime = Time.time;
         var lightIntensityStart = crystalLight.intensity;
         var timer = 0f;
