@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class CrystalIcon : MonoBehaviour
 {
-    private const int MaximumCrystals = 3;
     private readonly int RevealPropId = Shader.PropertyToID("_RevealPercentage");
 
     [field: SerializeField] public Crystal.Type Type { get; private set; }
@@ -32,7 +31,7 @@ public class CrystalIcon : MonoBehaviour
         crystalImage.material.DOKill();
         DOTween.Sequence()
             .Append(borderImage.DOColor(Color.white, borderTweenDuration).SetEase(tweenEase))
-            .Append(crystalImage.material.DOFloat(CrystalCount / (float)MaximumCrystals, RevealPropId, tweenDuration).SetEase(tweenEase));
+            .Append(crystalImage.material.DOFloat(CrystalCount / (float)Crystal.MaxNeededPerType, RevealPropId, tweenDuration).SetEase(tweenEase));
     }
 
     public void HideBorder()

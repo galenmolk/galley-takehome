@@ -10,6 +10,7 @@ public class Crystal : MonoBehaviour
         Peach,
         Purple
     }
+    public const int MaxNeededPerType = 3;
 
     public static event Action<Crystal.Type> OnCrystalAcquired;
 
