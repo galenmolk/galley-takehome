@@ -44,7 +44,7 @@ public class CrateDestructionController : MonoBehaviour
         }
 
         currentHealth -= damage;
-        ParticlePooler.Instance.SpawnDust(collision.GetContact(0).point);
+        ParticlePooler.Instance.SpawnDustEffect(collision.GetContact(0).point);
 
         if (currentHealth <= 0f)
         {

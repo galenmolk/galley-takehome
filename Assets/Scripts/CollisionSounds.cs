@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CollisionSounds : MonoBehaviour
 {
@@ -53,14 +50,11 @@ public class CollisionSounds : MonoBehaviour
 
         var sfxClip = clips[Random.Range(0, clips.Length)];
 
-        //var sfxClip = clips[trackIdx];
-        trackIdx = ((trackIdx + 1) % clips.Length);
         var clip = sfxClip.clip;
         audioSource.clip = clip;
 
         var logSpeed = Mathf.Log10(velocity);
         audioSource.volume = Mathf.Min(baseVolume + logSpeed, maxVolume);
-        Debug.Log($"Vol: {audioSource.volume} (vel: {logSpeed})");
         audioSource.time = clip.length * sfxClip.startTime;
         audioSource.pitch = Random.Range(minPitch, maxPitch);
         lastClipTime = currentTime;

@@ -25,7 +25,6 @@ public class ShipSway : MonoBehaviour
     {
         baseRotation = transform.eulerAngles;
         startRotation = baseRotation;
-        Debug.Log($"start rot: {startRotation}");
         SetRandomTargetRotation();
     }
 

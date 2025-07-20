@@ -11,43 +11,73 @@ public class ParticlePooler : MonoBehaviour
 
     private readonly Queue<ParticleSystem> dustInstances = new();
 
+    private Dictionary<Crystal.Type, (Queue<ParticleSystem> queue, ParticleSystem prefab)> crystalCollectInstances;
+    [SerializeField] private ParticleSystem greenCollectPrefab, purpleCollectPrefab, peachCollectPrefab;
+
     private void Awake()
     {
         Instance = this;
 
+        crystalCollectInstances = new Dictionary<Crystal.Type, (Queue<ParticleSystem>, ParticleSystem)>()
+        {
+            { Crystal.Type.Green, (new Queue<ParticleSystem>(), greenCollectPrefab) },
+            { Crystal.Type.Peach, (new Queue<ParticleSystem>(), peachCollectPrefab) },
+            { Crystal.Type.Purple, (new Queue<ParticleSystem>(), purpleCollectPrefab) },
+        };
+
         for (int i = 0; i < initialSize; i++)
         {
-            EnqueueNewInstance();
+            EnqueueNewInstance(dustInstances, dustPrefab);
+
+            var (greenQueue, greenPrefab) = crystalCollectInstances[Crystal.Type.Green];
+            EnqueueNewInstance(greenQueue, greenPrefab);
+
+            var (peachQueue, peachPrefab) = crystalCollectInstances[Crystal.Type.Peach];
+            EnqueueNewInstance(peachQueue, peachPrefab);
+
+            var (purpleQueue, purplePrefab) = crystalCollectInstances[Crystal.Type.Purple];
+            EnqueueNewInstance(purpleQueue, purplePrefab);
         }
     }
 
-    public void SpawnDust(Vector3 position)
+    public void SpawnDustEffect(Vector3 position)
     {
-        if (dustInstances.TryDequeue(out var dustInstance))
+        SpawnEffect(position, dustInstances, dustPrefab);
+    }
+
+    public void SpawnCrystalCollectEffect(Vector3 position, Crystal.Type type)
+    {
+        var (queue, prefab) = crystalCollectInstances[type];
+        SpawnEffect(position, queue, prefab);
+    }
+
+    private void SpawnEffect(Vector3 position, Queue<ParticleSystem> queue, ParticleSystem prefab)
+    {
+        if (queue.TryDequeue(out var effectInstance))
         {
-            dustInstance.transform.position = position;
+            effectInstance.transform.position = position;
         }
         else
         {
-            dustInstance = EnqueueNewInstance();
+            effectInstance = EnqueueNewInstance(queue, prefab);
         }
 
-        dustInstance.gameObject.SetActive(true);
-        StartCoroutine(EnqueueAfterLifetime(dustInstance));
+        effectInstance.gameObject.SetActive(true);
+        StartCoroutine(EnqueueAfterLifetime(effectInstance, queue));
     }
 
-    private ParticleSystem EnqueueNewInstance()
+    private ParticleSystem EnqueueNewInstance(Queue<ParticleSystem> queue, ParticleSystem prefab)
     {
-        var instance = Instantiate(dustPrefab, transform);
+        var instance = Instantiate(prefab, transform);
         instance.gameObject.SetActive(false);
-        dustInstances.Enqueue(instance);
+        queue.Enqueue(instance);
         return instance;
     }
 
-    private IEnumerator EnqueueAfterLifetime(ParticleSystem dust)
+    private IEnumerator EnqueueAfterLifetime(ParticleSystem instance, Queue<ParticleSystem> queue)
     {
-        yield return new WaitForSeconds(dust.main.duration);
-        dust.gameObject.SetActive(false);
-        dustInstances.Enqueue(dust);
+        yield return new WaitForSeconds(instance.main.duration);
+        instance.gameObject.SetActive(false);
+        queue.Enqueue(instance);
     }
 }

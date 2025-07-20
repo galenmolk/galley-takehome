@@ -12,11 +12,15 @@ public class CrystalIcon : MonoBehaviour
     public int CrystalCount { get; private set; }
 
     [SerializeField] private Image crystalImage;
+    [SerializeField] private Image borderImage;
     [SerializeField] private float tweenDuration = 1f;
     [SerializeField] private Ease tweenEase = Ease.OutSine;
+    [SerializeField] private float borderTweenDuration = 0.3f;
+    [SerializeField] private Ease borderTweenEase = Ease.OutCubic;
 
     private void Awake()
     {
+        borderImage.color = Color.clear;
         crystalImage.material = new Material(crystalImage.material);
         crystalImage.material.SetFloat(RevealPropId, 0f);
     }
@@ -26,6 +30,13 @@ public class CrystalIcon : MonoBehaviour
         CrystalCount++;
 
         crystalImage.material.DOKill();
-        crystalImage.material.DOFloat(CrystalCount / (float)MaximumCrystals, RevealPropId, tweenDuration).SetEase(tweenEase);
+        DOTween.Sequence()
+            .Append(borderImage.DOColor(Color.white, borderTweenDuration).SetEase(tweenEase))
+            .Append(crystalImage.material.DOFloat(CrystalCount / (float)MaximumCrystals, RevealPropId, tweenDuration).SetEase(tweenEase));
+    }
+
+    public void HideBorder()
+    {
+        borderImage.color = Color.clear;
     }
 }

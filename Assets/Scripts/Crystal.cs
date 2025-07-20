@@ -24,13 +24,13 @@ public class Crystal : MonoBehaviour
     [SerializeField] private float lightIntensityMax = 7f;
     [SerializeField] private AudioClip spawnSfx;
     [SerializeField] private float preSequenceDelay = 0.35f;
+    [SerializeField] private AudioClip poofSfx;
 
     private float spawnTime;
 
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(preSequenceDelay);
-
         AudioSource.PlayClipAtPoint(spawnSfx, transform.position);
 
         spawnTime = Time.time;
@@ -48,13 +48,12 @@ public class Crystal : MonoBehaviour
             yield return null;
         }
 
+        ParticlePooler.Instance.SpawnCrystalCollectEffect(transform.position, type);
+        AudioSource.PlayClipAtPoint(poofSfx, transform.position);
+
+        OnCrystalAcquired?.Invoke(type);
+
         CameraShaker.Instance.SetAmplitude(0f);
         gameObject.SetActive(false);
-
-        // crystal explosion sfx
-
-        // particle effect shoots up to crystal meter in UI
-        // crystal icon charges
-        OnCrystalAcquired?.Invoke(type);
     }
 }
