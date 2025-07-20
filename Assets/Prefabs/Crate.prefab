@@ -135,7 +135,7 @@ MonoBehaviour:
   audioSource: {fileID: 5449124586207917423}
   minimumTimeBetweenClips: 0.2
   rb: {fileID: 8155388281711959770}
-  maxVolume: 0.6
+  maxVolume: 0.55
   baseVolume: 0.05
   minPitch: 0.9
   maxPitch: 1.1

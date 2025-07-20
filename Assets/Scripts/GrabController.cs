@@ -34,9 +34,12 @@ public class GrabController : MonoBehaviour
 
     void OnDisable()
     {
-        UserInputListener.Instance.OnGrab -= TryGrab;
-        UserInputListener.Instance.OnRelease -= TryRelease;
-        UserInputListener.Instance.OnLook -= Look;
+        if (UserInputListener.Instance != null)
+        {
+            UserInputListener.Instance.OnGrab -= TryGrab;
+            UserInputListener.Instance.OnRelease -= TryRelease;
+            UserInputListener.Instance.OnLook -= Look;
+        }
     }
 
     private void TryGrab()

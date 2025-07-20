@@ -51,7 +51,6 @@ public class CrystalTrackerPanel : MonoBehaviour
         float panelHalfHeight = rt.rect.height * 0.5f;
         float canvasHalfHeight = ((RectTransform)rt.root).rect.height * 0.5f;
 
-        Debug.Log($"Half height: {panelHalfHeight} {canvasHalfHeight}");
         onScreenPos = new Vector2(0f, -canvasHalfHeight + panelHalfHeight + 50f); 
         offScreenPos = new Vector2(0f, -canvasHalfHeight - panelHalfHeight - 50f);
         winPos = Vector2.zero;
