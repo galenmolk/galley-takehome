@@ -125,11 +125,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2077128383827762742, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: m_Name
-      value: Pallet (5)
+      value: Pallet
       objectReference: {fileID: 0}
     - target: {fileID: 2863035307819097985, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: crystalPrefab
@@ -195,7 +195,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2107915944265334422, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: crystalPrefab
@@ -203,7 +203,7 @@ PrefabInstance:
       objectReference: {fileID: 3185776753139338361, guid: 8ab66dcede32047bebd4bf9f1b263317, type: 3}
     - target: {fileID: 2749491901291511585, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: m_Name
-      value: Barrel (4)
+      value: Barrel
       objectReference: {fileID: 0}
     - target: {fileID: 5540484841463618963, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -410,6 +410,53 @@ AudioLowPassFilter:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &331293501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 331293502}
+  m_Layer: 0
+  m_Name: GrabbableObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &331293502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331293501}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4118238432147781417}
+  - {fileID: 1964865770}
+  - {fileID: 988513522}
+  - {fileID: 1744677786}
+  - {fileID: 2291630220135357213}
+  - {fileID: 1375855732}
+  - {fileID: 867974487}
+  - {fileID: 1426365572}
+  - {fileID: 156459825}
+  - {fileID: 3859733007162004851}
+  - {fileID: 1006143220}
+  - {fileID: 1917683543}
+  - {fileID: 137437326}
+  - {fileID: 1397598216}
+  - {fileID: 1168330144}
+  - {fileID: 1285736437}
+  m_Father: {fileID: 1202776025}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &354682054
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,7 +2099,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2107915944265334422, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: crystalPrefab
@@ -2060,7 +2107,7 @@ PrefabInstance:
       objectReference: {fileID: 7520969318696259973, guid: d99face8455f342fb8704027b47b2c2d, type: 3}
     - target: {fileID: 2749491901291511585, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: m_Name
-      value: Barrel (2)
+      value: Barrel
       objectReference: {fileID: 0}
     - target: {fileID: 5540484841463618963, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2280,7 +2327,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 370497688619762366, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_Size.x
@@ -2360,7 +2407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5135694506850955751, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_Name
-      value: Crate (1)
+      value: Create
       objectReference: {fileID: 0}
     - target: {fileID: 5135694506850955751, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_IsActive
@@ -2410,11 +2457,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2077128383827762742, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: m_Name
-      value: Pallet (2)
+      value: Pallet
       objectReference: {fileID: 0}
     - target: {fileID: 2863035307819097985, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: crystalPrefab
@@ -2625,11 +2672,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2077128383827762742, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: m_Name
-      value: Pallet (1)
+      value: Pallet
       objectReference: {fileID: 0}
     - target: {fileID: 2863035307819097985, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: crystalPrefab
@@ -2719,22 +2766,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2231168497482642007}
-  - {fileID: 4118238432147781417}
-  - {fileID: 1964865770}
-  - {fileID: 988513522}
-  - {fileID: 1744677786}
-  - {fileID: 2291630220135357213}
-  - {fileID: 1375855732}
-  - {fileID: 867974487}
-  - {fileID: 1426365572}
-  - {fileID: 156459825}
-  - {fileID: 3859733007162004851}
-  - {fileID: 1006143220}
-  - {fileID: 1917683543}
-  - {fileID: 137437326}
-  - {fileID: 1397598216}
-  - {fileID: 1168330144}
-  - {fileID: 1285736437}
+  - {fileID: 331293502}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1265301001 stripped
@@ -2844,11 +2876,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2077128383827762742, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: m_Name
-      value: Pallet (4)
+      value: Pallet
       objectReference: {fileID: 0}
     - target: {fileID: 2863035307819097985, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: crystalPrefab
@@ -2953,7 +2985,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2107915944265334422, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: crystalPrefab
@@ -2961,7 +2993,7 @@ PrefabInstance:
       objectReference: {fileID: 3185776753139338361, guid: 8ab66dcede32047bebd4bf9f1b263317, type: 3}
     - target: {fileID: 2749491901291511585, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: m_Name
-      value: Barrel (1)
+      value: Barrel
       objectReference: {fileID: 0}
     - target: {fileID: 5540484841463618963, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3019,11 +3051,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2077128383827762742, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: m_Name
-      value: Pallet (6)
+      value: Pallet
       objectReference: {fileID: 0}
     - target: {fileID: 2863035307819097985, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: crystalPrefab
@@ -3089,7 +3121,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2107915944265334422, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: crystalPrefab
@@ -3097,7 +3129,7 @@ PrefabInstance:
       objectReference: {fileID: 3185776753139338361, guid: 8ab66dcede32047bebd4bf9f1b263317, type: 3}
     - target: {fileID: 2749491901291511585, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: m_Name
-      value: Barrel (3)
+      value: Barrel
       objectReference: {fileID: 0}
     - target: {fileID: 5540484841463618963, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3164,7 +3196,7 @@ GameObject:
   - component: {fileID: 1713455051}
   - component: {fileID: 1713455052}
   m_Layer: 5
-  m_Name: CrystalTracker
+  m_Name: CrystalGameController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3468,7 +3500,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 370497688619762366, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_Size.x
@@ -3548,7 +3580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5135694506850955751, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_Name
-      value: Crate (2)
+      value: Create
       objectReference: {fileID: 0}
     - target: {fileID: 5135694506850955751, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_IsActive
@@ -3762,8 +3794,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1778789502}
   - {fileID: 1724169776}
+  - {fileID: 1778789502}
   - {fileID: 1713455047}
   - {fileID: 2086660050}
   m_Father: {fileID: 0}
@@ -3823,11 +3855,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2077128383827762742, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: m_Name
-      value: Pallet (3)
+      value: Pallet
       objectReference: {fileID: 0}
     - target: {fileID: 2863035307819097985, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: crystalPrefab
@@ -4255,7 +4287,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 370497688619762366, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_Size.x
@@ -4279,7 +4311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3282648295107564373, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.15
+      value: 1.1500001
       objectReference: {fileID: 0}
     - target: {fileID: 3282648295107564373, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_LocalScale.y
@@ -4335,7 +4367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5135694506850955751, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_Name
-      value: Crate (3)
+      value: Create
       objectReference: {fileID: 0}
     - target: {fileID: 5135694506850955751, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_IsActive
@@ -4478,7 +4510,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2107915944265334422, guid: 00124c603fc834811b15e5b27ea0f4cf, type: 3}
       propertyPath: crystalPrefab
@@ -4614,7 +4646,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 2077128383827762742, guid: b1a71db691413478d917e379fd2d2a49, type: 3}
       propertyPath: m_Name
@@ -4689,7 +4721,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1202776025}
+    m_TransformParent: {fileID: 331293502}
     m_Modifications:
     - target: {fileID: 370497688619762366, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_Size.x
@@ -4769,7 +4801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5135694506850955751, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_Name
-      value: Crate
+      value: Create
       objectReference: {fileID: 0}
     - target: {fileID: 5135694506850955751, guid: bc09a6eb5f1c54cc1a6c0f2a2490ae3b, type: 3}
       propertyPath: m_IsActive
@@ -5504,11 +5536,11 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 963978042}
-  - {fileID: 1885822131}
   - {fileID: 2753507136173310439}
   - {fileID: 929379869}
-  - {fileID: 1202776025}
   - {fileID: 5890617619156411561}
+  - {fileID: 1885822131}
+  - {fileID: 1202776025}
   - {fileID: 1115578619}
   - {fileID: 1337349819}
   - {fileID: 406249188}
