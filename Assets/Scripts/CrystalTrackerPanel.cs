@@ -9,52 +9,53 @@ public class CrystalTrackerPanel : MonoBehaviour
 {
     private Dictionary<Crystal.Type, CrystalIcon> crystalIcons = new();
 
-    [SerializeField] private AudioSource audioSource;
+    [Header("Audio Clips")]
     [SerializeField] private AudioClip collectClip;
     [SerializeField] private AudioClip winClip;
     [SerializeField] private AudioClip tweenSfx;
-    [SerializeField] private RectTransform rt;
+
+    [Header("Panel Tween Settings")]
     [SerializeField] private float tweenDuration = 0.7f;
     [SerializeField] private float pauseDuration = 3f;
+    [SerializeField] private Ease tweenEase = Ease.OutCubic;
+
+
+    [Header("Win Flow Settings")]
     [SerializeField] private float winTweenDuration = 1.5f;
     [SerializeField] private Ease winTweenEase = Ease.InOutCubic;
     [SerializeField] private float winScale = 3f;
-    [SerializeField] private Ease tweenEase = Ease.OutCubic;
-    [SerializeField] private float delayBetweenCrystals = 0.4f;
-
-    [SerializeField] private CanvasGroup gameFadePanel;
     [SerializeField] private float winDelay = 4f;
-    [SerializeField] private float gameFadePanelDuration = 3f;
-    [SerializeField] private AudioSource musicSource;
 
+    [Header("General Settings")]
+    [SerializeField] private float gamefadeInDelay = 2f;
+    [SerializeField] private float gameFadePanelDuration = 3f;
+
+    [Header("References")]
+    [SerializeField] private CanvasGroup gameFadePanel;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private RectTransform rt;
 
     private Vector2 onScreenPos;
     Vector2 offScreenPos;
     private Vector2 winPos;
     private bool isPanelVisible;
-
     private bool isProcessing;
     private readonly Queue<CrystalIcon> crystalQueue = new();
 
-    public Crystal.Type testType;
-    [ContextMenu("test")]
-    public void Test()
-    {
-        EnqueueCrystal(testType);
-    }
-
     private void Start()
     {
+        // Start with a black screen
         gameFadePanel.alpha = 1f;
-        DOTween.Sequence().AppendInterval(2f).Append(gameFadePanel.DOFade(0f, gameFadePanelDuration));
 
+        // Calculate panel positions for later.
         float panelHalfHeight = rt.rect.height * 0.5f;
         float canvasHalfHeight = ((RectTransform)rt.root).rect.height * 0.5f;
-
-        onScreenPos = new Vector2(0f, -canvasHalfHeight + panelHalfHeight + 50f); 
+        onScreenPos = new Vector2(0f, -canvasHalfHeight + panelHalfHeight + 50f);
         offScreenPos = new Vector2(0f, -canvasHalfHeight - panelHalfHeight - 50f);
         winPos = Vector2.zero;
 
+        // Ensure panel is hidden.
         rt.anchoredPosition = offScreenPos;
 
         crystalIcons = transform.
@@ -63,6 +64,10 @@ public class CrystalTrackerPanel : MonoBehaviour
                 icon => icon.Type,
                 icon => icon
             );
+
+        DOTween.Sequence()
+            .AppendInterval(gamefadeInDelay)
+            .Append(gameFadePanel.DOFade(0f, gameFadePanelDuration));
     }
 
     private void OnEnable()
@@ -79,7 +84,8 @@ public class CrystalTrackerPanel : MonoBehaviour
     {
         if (!crystalIcons.TryGetValue(type, out var crystalState))
         {
-            Debug.LogError($"[{nameof(CrystalTrackerPanel)}.{nameof(EnqueueCrystal)}] No crystal state found for type ({type}).");
+            Debug.LogError($"[{nameof(CrystalTrackerPanel)}.{nameof(EnqueueCrystal)}] " +
+             "No crystal state found for type ({type}).");
             return;
         }
 
@@ -121,6 +127,12 @@ public class CrystalTrackerPanel : MonoBehaviour
         }
 
         await rt.DOAnchorPos(offScreenPos, tweenDuration).SetEase(tweenEase).AsyncWaitForCompletion();
+
+        foreach (var icon in crystalIcons.Values)
+        {
+            icon.HideBorder();
+        }
+
         isPanelVisible = false;
         isProcessing = false;
     }
@@ -129,16 +141,17 @@ public class CrystalTrackerPanel : MonoBehaviour
     {
         audioSource.PlayOneShot(winClip);
 
-        var winSequence = DOTween.Sequence();
-        winSequence
+        DOTween.Sequence()
             .Append(rt.DOAnchorPos(winPos, winTweenDuration).SetEase(winTweenEase))
             .Join(rt.DOScale(Vector3.one * winScale, winTweenDuration).SetEase(winTweenEase))
             .AppendInterval(winDelay)
             .Append(gameFadePanel.DOFade(1f, gameFadePanelDuration))
             .Join(musicSource.DOFade(0f, gameFadePanelDuration))
-            .AppendCallback(() =>
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            });
+            .AppendCallback(ReloadScene);
+    }
+
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

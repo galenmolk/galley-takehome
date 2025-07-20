@@ -22,7 +22,6 @@ public class UserInputListener : MonoBehaviour
     public event Action OnGrab;
     public event Action OnRelease;
     public event Action<Vector2> OnLook;
-    public event Action<Vector2> OnMove;
 
     public Vector2 MoveValue { get; private set; }
     public Vector2 LookValue { get; private set; }

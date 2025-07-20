@@ -43,9 +43,11 @@ public class Crystal : MonoBehaviour
             timer = Time.time - spawnTime;
 
             var t = buildUpCurve.Evaluate(timer / buildUpDuration);
+
             CameraShaker.Instance.SetAmplitude(Mathf.Lerp(0f, cameraShakeMax, t));
             shimmerAudioSource.pitch = Mathf.Lerp(audioPitchStart, audioPitchEnd, t);
             crystalLight.intensity = Mathf.Lerp(lightIntensityStart, lightIntensityMax, t);
+            
             yield return null;
         }
 

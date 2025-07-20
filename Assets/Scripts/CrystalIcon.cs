@@ -15,7 +15,6 @@ public class CrystalIcon : MonoBehaviour
     [SerializeField] private float tweenDuration = 1f;
     [SerializeField] private Ease tweenEase = Ease.OutSine;
     [SerializeField] private float borderTweenDuration = 0.3f;
-    [SerializeField] private Ease borderTweenEase = Ease.OutCubic;
 
     private void Awake()
     {
