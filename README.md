@@ -4,10 +4,6 @@
 
 ![](https://github.com/galenmolk/galley-takehome/blob/main/scene.gif)
 ![](https://github.com/galenmolk/galley-takehome/blob/main/throw.gif)
-![](https://github.com/galenmolk/galley-takehome/blob/main/still1.png)
-![](https://github.com/galenmolk/galley-takehome/blob/main/still2.png)
-![](https://github.com/galenmolk/galley-takehome/blob/main/still3.png)
-![](https://github.com/galenmolk/galley-takehome/blob/main/still4.png)
 
 For this exercise, I've created a mini-game that takes place below the deck of a sailing ship, out on the open ocean under the full moon. You find yourself in the dimly lit hold, surrounded by cargo. See if you can recover all of your lost stones of power.
 
@@ -45,3 +41,8 @@ With the time I had, I did my best to focus on implementing things that contribu
 12. [Cyberwave Orchestra (rewards sfx)](https://assetstore.unity.com/packages/audio/sound-fx/hints-stars-points-rewards-sound-effects-lite-pack-295538) 
 13. [Spring Spring (win music)](https://opengameart.org/content/fanfares)
 14. [Nick Veselov (water shader)](https://assetstore.unity.com/packages/vfx/shaders/water-shaders-v2-x-149916)
+
+![](https://github.com/galenmolk/galley-takehome/blob/main/still1.png)
+![](https://github.com/galenmolk/galley-takehome/blob/main/still2.png)
+![](https://github.com/galenmolk/galley-takehome/blob/main/still3.png)
+![](https://github.com/galenmolk/galley-takehome/blob/main/still4.png)
