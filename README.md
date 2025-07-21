@@ -2,16 +2,16 @@
 
 > _All is quiet save for the waves lapping the sides of the hull and a drunken sailor muddling his way through a ballad. You feel the humming energy of the Great Stones calling out to you nearby. There is nothing to stop you now._ 
 
-For this exercise, I've created a mini-game that takes place below the deck of a sailing ship, out on the open ocean in the dead of night. You find yourself in the hold, surrounded by cargo. See if you can recover all of your lost gemstones.
+For this exercise, I've created a mini-game that takes place below the deck of a sailing ship, out on the open ocean under the full moon. You find yourself in the hold, surrounded by cargo. See if you can recover all of your lost stones of power.
 
 ### INSTRUCTIONS
-1. Clone repository.
+1. Clone the repository.
 2. Open in Unity (version 6.0).
-3. For the optimal experience:
-   1. Connect headphones/turn on computer volume.
+3. For the best experience:
+   1. Connect headphones/turn on volume.
    2. Connect a mouse.
-   2. Set the Aspect Ratio of the Game Window to 16:9.
-4. Press play.
+   2. Set the Aspect Ratio of the Game Window to 16:9 if it isn't already.
+4. Press play, then click somewhere inside the Game Window to lock the cursor to the camera.
 
 ### CONTROLS
 1. Mouse to look around.
