@@ -2,6 +2,9 @@
 
 > _All is quiet save for the waves lapping the sides of the hull and a drunken sailor muddling his way through a ballad. You feel the humming energy of the Great Stones calling out to you nearby. There is nothing to stop you now._ 
 
+![](https://github.com/galenmolk/galley-takehome/blob/main/scene.gif)
+![](https://github.com/galenmolk/galley-takehome/blob/main/throw.gif)
+
 For this exercise, I've created a mini-game that takes place below the deck of a sailing ship, out on the open ocean under the full moon. You find yourself in the dimly lit hold, surrounded by cargo. See if you can recover all of your lost stones of power.
 
 ### INSTRUCTIONS
